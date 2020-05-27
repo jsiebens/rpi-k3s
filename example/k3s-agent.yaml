@@ -1,0 +1,25 @@
+#cloud-config
+# vim: syntax=yaml
+#
+
+# Set your hostname here, the manage_etc_hosts will update the hosts file entries as well
+hostname: k3s-agent
+manage_etc_hosts: true
+
+package_update: false
+package_upgrade: false
+
+# Add an authorized ssh key to the pi user and lock password
+users:
+  - name: pi
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDlbIwM0SKMq497FGjehevXNN6lHTcuygLAxmyBQW9WbfRRxPo5sCBv8vYsehx+3bVqU9Rci49AZdfsJQvcLYbqU2UrGsangoifhEvAAT2aHi278d/lPuL0uMSBHDgVPw+5T6jgCQnwfMedNihIl2gV7GiSLH8Y7IOdT3Obj0BJeQ== johan@raspberry.local
+
+write_files:
+# Configure k3s environment file
+- path: /etc/systemd/system/k3s.service.env
+  content: |
+    K3S_TOKEN=i1F2tDzvHQsWvy5MnDsF
+    K3S_URL=https://192.168.0.30:6443
