@@ -8,4 +8,6 @@ before_install:
 
 script:
 - sudo make k3s-agent
+- sudo tar -czvf dist/rpi-k3s-agent.tgz -C dist rpi-k3s-agent.iso
 - sudo make k3s-server
+- sudo tar -czvf dist/rpi-k3s-server.tgz -C dist rpi-k3s-server.iso
