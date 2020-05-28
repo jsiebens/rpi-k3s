@@ -120,7 +120,7 @@ flash --hostname k3s-agent-003 --user-data example/k3s-agent.yaml dist/k3s-agent
 
 ### Accessing your cluster
 
-After booting all master and agent Raspberry Pi, ssh into your master node to get the kubeconfig file located at e.g. `/etc/k3s/kubeconfig.yaml`, depending on the `K3S_KUBECONFIG_OUTPUT` variable. Use this file to configure `kubectl` and you are good to go.
+After booting the master and agents, ssh into your master node to get the kubeconfig file located at e.g. `/etc/k3s/kubeconfig.yaml`, depending on the `K3S_KUBECONFIG_OUTPUT` variable. Use this file to configure `kubectl` and you are good to go.
 
 
 ## Building the images
