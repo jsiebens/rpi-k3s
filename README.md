@@ -112,10 +112,10 @@ __pro tip:__
 E.g.
 
 ```
-flash --hostname k3s-server --user-data example/k3s-server.yaml
-flash --hostname k3s-agent-001 --user-data example/k3s-agent.yaml
-flash --hostname k3s-agent-002 --user-data example/k3s-agent.yaml
-flash --hostname k3s-agent-003 --user-data example/k3s-agent.yaml
+flash --hostname k3s-server --user-data example/k3s-server.yaml dist/k3s-server.img
+flash --hostname k3s-agent-001 --user-data example/k3s-agent.yaml dist/k3s-agent.img
+flash --hostname k3s-agent-002 --user-data example/k3s-agent.yaml dist/k3s-agent.img
+flash --hostname k3s-agent-003 --user-data example/k3s-agent.yaml dist/k3s-agent.img
 ```
 
 ### Accessing your cluster
