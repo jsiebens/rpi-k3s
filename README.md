@@ -11,7 +11,32 @@ Beside k3s, also [cloud-init](https://cloudinit.readthedocs.io/en/18.3/) is avai
 
 This setup includes the following images:
 
-- __k3s-agent.img__: a Raspbian image with k3s as a systemd services, configured to run as agent (`k3s agent`). 
+- __k3s-agent.img__: a Raspbian image with k3s as a systemd service, configured to run as agent (`k3s agent`). 
 
-- __k3s-server.img__: a Raspbian image with k3s as a systemd services, configured to run as server (`k3s server`).
+- __k3s-server.img__: a Raspbian image with k3s as a systemd service, configured to run as server (`k3s server`).
 
+
+## Building the images
+
+This project includes a Vagrant file and some scripts to build the images in an isolated environment.
+
+To use the Vagrant environment, start by cloning this repository:
+
+```
+git clone https://github.com/jsiebens/rpi-k3s
+cd rpi-faasd
+```
+
+Next, start the Vagrant box and ssh into it:
+
+```
+vagrant up
+vagrant ssh
+```
+
+When connected with the Vagrant box, run `make` in the `/vagrant` directory:
+
+```
+cd /vagrant
+make
+```
