@@ -15,9 +15,13 @@ endef
 
 .PHONY = %
 
-all: k3s-agent.img k3s-server.img
+SRCS := $(wildcard packer/rpi-*.json)
+IMAGES := $(SRCS:packer/rpi-%.json=rpi-%.img)
+ARCHIVES := $(SRCS:packer/rpi-%.json=rpi-%.tgz)
 
-dist: k3s-agent.tgz k3s-server.tgz
+all: ${IMAGES}
+
+dist: ${ARCHIVES}
 
 clean:
 	rm -rf dist
