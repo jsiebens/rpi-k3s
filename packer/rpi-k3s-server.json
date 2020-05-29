@@ -1,6 +1,7 @@
 {
   "variables": {
-    "k3s_version": ""
+    "k3s_version": "",
+    "preferred_mirror": "{{env `PREFERRED_MIRROR`}}"
   },
   "builders": [
     {
@@ -14,18 +15,20 @@
     {
       "type": "shell",
       "inline": [
-        "touch /boot/ssh",
-        "apt-get update"
+        "touch /boot/ssh"
       ]
     },
     {
       "type": "shell",
       "environment_vars": [
-        "K3S_VERSION={{user `k3s_version`}}"
-      ],      
+        "K3S_VERSION={{user `k3s_version`}}",
+        "PREFERRED_MIRROR={{user `preferred_mirror`}}"
+      ],
       "scripts": [
+        "scripts/before-installation.sh",
         "scripts/install-cloud-init.sh",
-        "scripts/install-k3s-server.sh"
+        "scripts/install-k3s-server.sh",
+        "scripts/after-installation.sh"
       ]
     }
   ]
