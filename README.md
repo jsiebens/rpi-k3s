@@ -131,7 +131,7 @@ To use the Vagrant environment, start by cloning this repository:
 
 ```
 git clone https://github.com/jsiebens/rpi-k3s
-cd rpi-faasd
+cd rpi-k3s
 ```
 
 Next, start the Vagrant box and ssh into it:
