@@ -18,7 +18,7 @@ This setup includes the following images:
 
 ## How to use these images
 
-1. Download the image of the latest [release](https://github.com/jsiebens/rpi-faasd/releases) or build the image.
+1. Download the image of the latest [release](https://github.com/jsiebens/rpi-k3s/releases) or build the image.
 
 2. Flash the image to an SD card.
 
