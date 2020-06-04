@@ -1,34 +1,25 @@
 {
   "variables": {
-    "k3s_version": "",
-    "preferred_mirror": "{{env `PREFERRED_MIRROR`}}"
+    "k3s_version": ""
   },
   "builders": [
     {
       "type": "arm-image",
-      "iso_url": "https://downloads.raspberrypi.org/raspbian_lite/images/raspbian_lite-2020-02-07/2020-02-05-raspbian-buster-lite.zip",
-      "iso_checksum_type": "sha256",
-      "iso_checksum": "7ed5a6c1b00a2a2ab5716ffa51354547bb1b5a6d5bcb8c996b239f9ecd25292b"
+      "image_type" : "raspberrypi",
+      "iso_url": "https://github.com/jsiebens/rpi-cloud-init/releases/download/v0.2/rpi-cloud-init.zip",
+      "iso_checksum_url": "https://github.com/jsiebens/rpi-cloud-init/releases/download/v0.2/rpi-cloud-init.zip.sha256",
+      "iso_checksum_type": "sha256"
     }
   ],
   "provisioners": [
     {
       "type": "shell",
-      "inline": [
-        "touch /boot/ssh"
-      ]
-    },
-    {
-      "type": "shell",
       "environment_vars": [
-        "K3S_VERSION={{user `k3s_version`}}",
-        "PREFERRED_MIRROR={{user `preferred_mirror`}}"
+        "K3S_VERSION={{user `k3s_version`}}"
       ],
       "scripts": [
-        "scripts/before-installation.sh",
-        "scripts/install-cloud-init.sh",
-        "scripts/install-k3s-server.sh",
-        "scripts/after-installation.sh"
+        "scripts/install-k3s-binary.sh",
+        "scripts/install-k3s-server.sh"
       ]
     }
   ]
