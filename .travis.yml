@@ -6,12 +6,17 @@ services:
 script:
 - sudo make dist
 
+before_deploy:
+  - cd dist && sudo ../ci/hashgen.sh && cd ..
+
 deploy:
   provider: releases
   api_key:
-    secure: qJSjFAZMKs37W+xkNC5s5YwHBKJNa/T5YVIWN9DNRLZzny+miRyaoFBrgEeNB9nDjkBYsVEWriG4EPGLgyQobxj/JQl2n6XTppqe9myJX9vBWreMcKcKI/KALbvdIIkdamlscvdL6q5FWopoMLoLWOqVyGW4r+59aEKHj5N7X7IMCkZkN95VzuZ9gKA1ZMRp+81LxDbLZ2i/UMJZzJGUrvfe0DljL8ZJAHOqlv4+hT3nhxhqBbfSWFtXFI+RTVCAmMfBNSU+FjJxoXXMVfY90pFkTatXKs6jIaL6UmSk1/KcKFuprf/jvQpozhyS5Kd6H1gPGkv0fIjiaNbZggbEObRiEVLODXWwOiB/NvrpfSf0sYtLuiDiNboFBRvixqizqZs+Iqxk9f/QXm53rE/inD2qZXuuR0jpuicgcdWJuMV+PmIIdYVJOk8FsYjFG9PvFv7FRYkeSrfjmCMN1YW2f6xlXlUKEOHAI8/h3Xe2c1RwvLVyJHTnTMlAaJPRHd+QAgvvFkqRBwyRCVCB9cFAfXmoBncEqwYrrOZHP720vmOL32oK5Mc+JUCoILjDCE9VA9Mye4R74OA9V+n6jXQ8Iki76l/kXad2cyh6NsZmqQen2P02ZRrvIZySjBrf1mUerMBmxjGCBCy3ZkSl3wrgXb9U9t8YQnbd1YckrFxmFRw=
+    secure: 1aPl381dJEmlPqVdFVofm27aUfPYy5JkXUc2gObWJeceMPCORBNdJmnequpted35kTAwGGoN6109i3V4p62+9GUMwOua0/GO5NUEWr5sYIbFLqsHLxS3HM7fhrl+XzcaPlfgGhNyunnqT3OT/KRXL1Gn538r30tdRo+DN0y2zGJFFSxHHrNOOCpHyVwGlugC1uCwUVN+Fs/EjF1ZBEvalrSansZSZp8a6ejC8AZnf726IToCAMwCocqhkDme+DGNpV3qBAbYIJP6H4wlp0B9ZV07FjuTgfEUDQg7RBb60zRb+tbTRhtFg62LjpS6T+xZTNnBuG4BBO4kwUn2TagkNByy9GRiEnXbKx/RweNQP008m06FXdbC5SmAiZPf4a1jVUtg78RTdIhM4fb47jFnufknBSUyR7VHZj3qgVYF3T2M4dys4OcOL2cr/Bl02SIASMQOY0bD6YesfqEZtWkaIBpcVMnrsmkKyqSGjF0FRap0zoSQVW81LF2PVEJcXiICyAvEIQIEM1/nRK0A8s89Hk8uDQgSSrVih5tK0PbWbqsr747/Qdi3qf9i9QRZculRGY1LoS0800iV5DebSVG+0RTwJcoAiAGq/ElakYE+QKR051VeOGBLno3tCGxMsjWMJ0qN/tmvjoHRpY+yrEtrlzd25QGU4IxAkRuPy05DIeI=
   file_glob: true
-  file: dist/*.tgz
+  file: 
+    - dist/*.zip
+    - dist/*.zip.sha256
   skip_cleanup: true
   on:
     tags: true
