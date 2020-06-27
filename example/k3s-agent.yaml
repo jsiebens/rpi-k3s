@@ -23,3 +23,7 @@ write_files:
   content: |
     K3S_TOKEN=i1F2tDzvHQsWvy5MnDsF
     K3S_URL=https://192.168.0.30:6443
+
+# enable ssh
+runcmd:
+  - [ raspi-config, nonint, do_ssh, '0' ]
