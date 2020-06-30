@@ -10,13 +10,26 @@
       "iso_url": "http://cdimage.ubuntu.com/releases/20.04/release/ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz",
       "iso_checksum_type": "sha256",
       "iso_checksum": "48167067d65c5192ffe041c9cc4958cb7fcdfd74fa15e1937a47430ed7b9de99",
-      "image_mounts": [ "/boot/firmware", "/" ],
+      "image_mounts": [
+        "/boot/firmware",
+        "/"
+      ],
       "additional_chroot_mounts": [
-        [ "bind", "/run/systemd", "/run/systemd" ]
+        [
+          "bind",
+          "/run/systemd",
+          "/run/systemd"
+        ]
       ]
     }
   ],
   "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sed -i '1 s/$/ cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1/' /boot/firmware/cmdline.txt"
+      ]
+    },
     {
       "type": "shell",
       "environment_vars": [
