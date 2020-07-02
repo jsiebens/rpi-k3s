@@ -10,4 +10,4 @@ clean:
 	rm -rf dist
 
 %.img:
-	sudo packer build -var-file=packer/variables.json "packer/$*.json"
+	sudo packer build -parallel-builds=1 -var-file=packer/variables.json "packer/$*.json"
