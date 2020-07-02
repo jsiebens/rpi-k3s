@@ -1,8 +1,15 @@
 #!/bin/bash
 set -e
 
-echo "Fetching k3s binary ${K3S_VERSION}..."
-curl -s -L -o /usr/local/bin/k3s "https://github.com/rancher/k3s/releases/download/v${K3S_VERSION}/k3s-arm64"
+K3S_ARCH=armhf
+
+if [[ $PACKER_BUILD_NAME == *"arm64"* ]]; then
+  K3S_ARCH=arm64
+fi
+
+
+echo "Fetching k3s binary ${K3S_VERSION} ${K3S_ARCH} ..."
+curl -s -L -o /usr/local/bin/k3s "https://github.com/rancher/k3s/releases/download/v${K3S_VERSION}/k3s-${K3S_ARCH}"
 chmod 755 /usr/local/bin/k3s
 
 #echo "Fetching k3s images tar"
