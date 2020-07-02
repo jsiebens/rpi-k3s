@@ -6,7 +6,7 @@ before_install:
   - ci/provision.sh
 
 script:
-- sudo make dist
+- sudo make all
 
 before_deploy:
 - cd dist && sudo ../ci/hashgen.sh && cd ..
