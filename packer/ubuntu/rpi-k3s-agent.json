@@ -30,9 +30,6 @@
       "type": "shell",
       "inline": [
         "sed -i '1 s/$/ cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1/' /boot/firmware/cmdline.txt"
-      ],
-      "only": [
-        "rpi-ubuntu-arm64"
       ]
     },
     {
