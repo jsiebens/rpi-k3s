@@ -1,35 +1,20 @@
-define build_image
-	rm ${PWD}/dist/$1.img || true
-	rm -rf ${PWD}/output-arm-image
-	docker run \
-		--rm \
-		--privileged \
-		-v ${PWD}:/build:ro \
-		-v ${PWD}/packer_cache:/build/packer_cache \
-		-v ${PWD}/output-arm-image:/build/output-arm-image \
-		-e PREFERRED_MIRROR \
-		quay.io/solo-io/packer-builder-arm-image:v0.1.4.5 build -var-file=/build/packer/variables.json "/build/packer/$1.json"
-	mkdir -p ${PWD}/dist
-	mv ${PWD}/output-arm-image/image ${PWD}/dist/$1.img
-	rm -rf ${PWD}/output-arm-image
-endef
-
 .PHONY = %
 
-SRCS := $(wildcard packer/rpi-*.json)
-IMAGES := $(SRCS:packer/rpi-%.json=rpi-%.img)
-ARCHIVES := $(SRCS:packer/rpi-%.json=rpi-%.zip)
+RASPIOS_SRCS := $(wildcard packer/raspios/rpi-*.json)
+RASPIOS_IMAGES := $(RASPIOS_SRCS:packer/raspios/rpi-%.json=raspios/rpi-%.img)
 
-all: ${IMAGES}
+UBUNTU_SRCS := $(wildcard packer/ubuntu/rpi-*.json)
+UBUNTU_IMAGES := $(UBUNTU_SRCS:packer/ubuntu/rpi-%.json=ubuntu/rpi-%.img)
 
-dist: ${ARCHIVES}
+all: raspios ubuntu
+
+raspios: ${RASPIOS_IMAGES}
+
+ubuntu: ${UBUNTU_IMAGES}
 
 clean:
+	rm -rf images
 	rm -rf dist
 
 %.img:
-	$(call build_image,$*)
-
-%.zip: %.img
-	rm -rf dist/$@
-	cd dist; zip $@ $<
+	sudo packer build -parallel-builds=1 -var-file=packer/variables.json "packer/$*.json"
