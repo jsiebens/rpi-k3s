@@ -39,14 +39,14 @@
       ],
       "scripts": [
         "scripts/install-k3s-binary.sh",
-        "scripts/install-k3s-agent.sh"
+        "scripts/install-k3s-server.sh"
       ]
     }
   ],
   "post-processors": [
     {
       "type": "compress",
-      "output": "dist/rpi-k3s-agent-ubuntu64.zip"
+      "output": "dist/rpi-k3s-server-ubuntu64.zip"
     }
   ]
 }
