@@ -2,4 +2,5 @@
 output-arm-image
 packer_cache
 dist
+images
 *.log
